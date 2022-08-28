@@ -11,18 +11,21 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+        view.backgroundColor = .gray
         // Do any additional setup after loading the view.
+        viewControllers = [
+        createTabBarController(for: MainViewController(), image: UIImage(systemName: "cloud.fill")!),
+        createTabBarController(for: CartViewController(), image: UIImage(systemName: "sun.min.fill")!),
+        createTabBarController(for: AboutViewController(), image: UIImage(systemName: "pencil")!)
+        ]
     }
     
     
     
     fileprivate func createTabBarController(for rootViewController: UIViewController,
-                                            title: String,
                                             image: UIImage) -> UIViewController {
         
         let barController = UINavigationController(rootViewController: rootViewController)
-        barController.tabBarItem.title = title
         barController.tabBarItem.image = image
         barController.navigationBar.prefersLargeTitles = true
         rootViewController.navigationItem.title = title
