@@ -18,6 +18,8 @@ class MainViewController: ViewController {
         labelButtonStack.addArrangedSubview(selectedCategoryLabel)
         labelButtonStack.addArrangedSubview(selectedViewAllButton)
         
+        view.addSubview(selectedCategoryScroll)
+        
         view.addSubview(searchStack)
         searchStack.addArrangedSubview(searcBar)
         searchStack.addArrangedSubview(searchFilterButton)
@@ -27,6 +29,7 @@ class MainViewController: ViewController {
         hotSalesStack.addArrangedSubview(hotSalesButton)
         
         view.addSubview(hotSalesScroll)
+        hotSalesScroll.addSubview(hotSalesImage)
         
         view.addSubview(bestSellerStack)
         bestSellerStack.addArrangedSubview(bestSellerLabel)
@@ -44,28 +47,32 @@ class MainViewController: ViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Selected Category"
-        label.textColor = UIColor(red: 1, green: 0, blue: 53, alpha: 1)
+        label.textColor = UIColor.darkBlueEM
+        label.font = UIFont(name: String.MarkPro, size: 25)
         return label
+        
     }()
     
     let selectedViewAllButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("view all", for: .normal)
-        button.tintColor = UIColor(red: 255, green: 110, blue: 78, alpha: 1)
+        button.tintColor = UIColor.orangeEM
+        button.titleLabel?.font = UIFont(name: String.MarkPro, size: 15)
         return button
     }()
     
     private var labelButtonStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = .black
+        stack.backgroundColor = .lightGray
         return stack
     }()
     
     let selectedCategoryScroll: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
         return view
     }()
     
@@ -94,7 +101,8 @@ class MainViewController: ViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hot Sales"
-        label.textColor = UIColor(red: 1, green: 0, blue: 53, alpha: 1)
+        label.textColor = UIColor.darkBlueEM
+        label.font = UIFont(name: String.MarkPro, size: 25)
         return label
     }()
     
@@ -102,7 +110,8 @@ class MainViewController: ViewController {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("see all", for: .normal)
-        button.tintColor = UIColor(red: 255, green: 110, blue: 78, alpha: 1)
+        button.tintColor = UIColor.orangeEM
+        button.titleLabel?.font = UIFont(name: String.MarkPro, size: 15)
         return button
     }()
     
@@ -116,23 +125,32 @@ class MainViewController: ViewController {
     let hotSalesScroll: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .cyan
+//        view.backgroundColor = .cyan
         return view
+    }()
+    
+    let hotSalesImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(systemName: "pencil")
+        return image
     }()
     
     let bestSellerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Best Seller"
-        label.textColor = UIColor(red: 1, green: 0, blue: 53, alpha: 1)
+        label.textColor = UIColor.darkBlueEM
+        label.font = UIFont(name: String.MarkPro, size: 25)
         return label
     }()
     
     let bestSellerButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("see more", for: .normal)
-        button.tintColor = UIColor(red: 255, green: 110, blue: 78, alpha: 1)
+        button.tintColor = UIColor.orangeEM
+        button.titleLabel?.font = UIFont(name: String.MarkPro, size: 15)
         return button
     }()
     
@@ -155,16 +173,19 @@ class MainViewController: ViewController {
     func setUpConstrains() {
         labelButtonStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         labelButtonStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        labelButtonStack.heightAnchor.constraint(equalToConstant: view.frame.height / 5).isActive = true
+        labelButtonStack.heightAnchor.constraint(equalToConstant: view.frame.height / 7).isActive = true
         
-        selectedCategoryLabel.centerYAnchor.constraint(equalTo: labelButtonStack.centerYAnchor).isActive = true
-        selectedCategoryLabel.topAnchor.constraint(equalTo: labelButtonStack.topAnchor).isActive = true
-        selectedCategoryLabel.rightAnchor.constraint(equalTo: selectedViewAllButton.leftAnchor).isActive = true
+        selectedCategoryLabel.bottomAnchor.constraint(equalTo: labelButtonStack.bottomAnchor).isActive = true
+        selectedCategoryLabel.leftAnchor.constraint(equalTo: labelButtonStack.leftAnchor).isActive = true
         
-        selectedViewAllButton.topAnchor.constraint(equalTo: labelButtonStack.topAnchor).isActive = true
+        selectedViewAllButton.bottomAnchor.constraint(equalTo: labelButtonStack.bottomAnchor).isActive = true
         selectedViewAllButton.rightAnchor.constraint(equalTo: labelButtonStack.rightAnchor).isActive = true
         
-        searchStack.topAnchor.constraint(equalTo: labelButtonStack.bottomAnchor).isActive = true
+        selectedCategoryScroll.topAnchor.constraint(equalTo: labelButtonStack.bottomAnchor).isActive = true
+        selectedCategoryScroll.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+        selectedCategoryScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 12).isActive = true
+        
+        searchStack.topAnchor.constraint(equalTo: selectedCategoryScroll.bottomAnchor).isActive = true
         searchStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         searchStack.heightAnchor.constraint(equalToConstant: view.frame.height / 18).isActive = true
         
@@ -192,7 +213,7 @@ class MainViewController: ViewController {
         bestSellerScroll.topAnchor.constraint(equalTo: bestSellerStack.bottomAnchor).isActive = true
         bestSellerScroll.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         bestSellerScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 4).isActive = true
+        
     }
-    
     
 }
