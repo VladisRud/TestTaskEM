@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Welcome
+// MARK: - HomeScreen
 struct HomeScreen: Codable {
     let homeStore: [HomeStore]
     let bestSeller: [BestSeller]

@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Welcome
+// MARK: - Cart
 struct Cart: Codable {
     let basket: [Basket]
     let delivery, id: String

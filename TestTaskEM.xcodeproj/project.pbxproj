@@ -23,6 +23,9 @@
 		580B6BD728B7EB6700AB55B1 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580B6BD628B7EB6700AB55B1 /* MainViewController.swift */; };
 		580B6BD928B7EB7E00AB55B1 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580B6BD828B7EB7E00AB55B1 /* AboutViewController.swift */; };
 		580B6BDB28B7ECBA00AB55B1 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580B6BDA28B7ECBA00AB55B1 /* TabBarController.swift */; };
+		58888CA928C3521D0015E751 /* ApiClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58888CA828C3521D0015E751 /* ApiClass.swift */; };
+		58888CAC28C4B0AF0015E751 /* MarkPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58888CAA28C4B0AF0015E751 /* MarkPro-Medium.ttf */; };
+		58888CAD28C4B0AF0015E751 /* Mark-Pro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58888CAB28C4B0AF0015E751 /* Mark-Pro-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		580B6BD628B7EB6700AB55B1 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		580B6BD828B7EB7E00AB55B1 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		580B6BDA28B7ECBA00AB55B1 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		58888CA828C3521D0015E751 /* ApiClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClass.swift; sourceTree = "<group>"; };
+		58888CAA28C4B0AF0015E751 /* MarkPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarkPro-Medium.ttf"; sourceTree = "<group>"; };
+		58888CAB28C4B0AF0015E751 /* Mark-Pro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark-Pro-Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +91,7 @@
 		580B6BBB28B7E00600AB55B1 /* TestTaskEM */ = {
 			isa = PBXGroup;
 			children = (
+				58888CAE28C4B0B70015E751 /* Font */,
 				580AF10928BD042D0083184B /* Constant.swift */,
 				588EB2BF28BBEDD300E1EC14 /* Model */,
 				588EB2BE28BBEDCD00E1EC14 /* View */,
@@ -95,9 +102,18 @@
 				580B6BC528B7E00700AB55B1 /* Assets.xcassets */,
 				580B6BC728B7E00700AB55B1 /* LaunchScreen.storyboard */,
 				580B6BCA28B7E00700AB55B1 /* Info.plist */,
-				580AF11228C12A0A0083184B /* Mark-Pro.ttf */,
 			);
 			path = TestTaskEM;
+			sourceTree = "<group>";
+		};
+		58888CAE28C4B0B70015E751 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				580AF11228C12A0A0083184B /* Mark-Pro.ttf */,
+				58888CAA28C4B0AF0015E751 /* MarkPro-Medium.ttf */,
+				58888CAB28C4B0AF0015E751 /* Mark-Pro-Bold.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		588EB2BD28BBEDBF00E1EC14 /* Controller */ = {
@@ -125,6 +141,7 @@
 				580AF10328BBEE2E0083184B /* HomeViewModel.swift */,
 				580AF10528BBEE520083184B /* ProductDetailsModel.swift */,
 				580AF10728BBEEA80083184B /* CartModel.swift */,
+				58888CA828C3521D0015E751 /* ApiClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -187,6 +204,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58888CAD28C4B0AF0015E751 /* Mark-Pro-Bold.ttf in Resources */,
+				58888CAC28C4B0AF0015E751 /* MarkPro-Medium.ttf in Resources */,
 				580AF11328C12A0A0083184B /* Mark-Pro.ttf in Resources */,
 				580B6BC928B7E00700AB55B1 /* LaunchScreen.storyboard in Resources */,
 				580B6BC628B7E00700AB55B1 /* Assets.xcassets in Resources */,
@@ -201,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				580AF10D28BD4E900083184B /* SelectedCategoryScrollView.swift in Sources */,
+				58888CA928C3521D0015E751 /* ApiClass.swift in Sources */,
 				580B6BD928B7EB7E00AB55B1 /* AboutViewController.swift in Sources */,
 				580B6BC128B7E00600AB55B1 /* ViewController.swift in Sources */,
 				580B6BD528B7EB5700AB55B1 /* CartViewController.swift in Sources */,

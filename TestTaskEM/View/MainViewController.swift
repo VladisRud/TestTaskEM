@@ -8,12 +8,20 @@
 import UIKit
 
 class MainViewController: ViewController {
-
+    
+    let api = ApiClass()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-
+        
+        view.addSubview(topPanelStack)
+//        topPanelStack.addArrangedSubview(topPanelImage)
+//        topPanelStack.addArrangedSubview(topPanelLabel)
+//        topPanelStack.addArrangedSubview(topPanelButton)
+        
+        
         view.addSubview(labelButtonStack)
         labelButtonStack.addArrangedSubview(selectedCategoryLabel)
         labelButtonStack.addArrangedSubview(selectedViewAllButton)
@@ -38,17 +46,49 @@ class MainViewController: ViewController {
         view.addSubview(bestSellerScroll)
         
         setUpConstrains()
+        
+        downloadHotSellerImage()
         // Do any additional setup after loading the view.
     }
     
     //MARK: - Elements of UI
+    
+    let topPanelImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "LocationSign")
+        image.frame.size.height = 0.15
+        image.frame.size.width = 0.1
+        return image
+    }()
+    
+    let topPanelLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Zihuatanejo, Gro"
+        return label
+    }()
+    
+    let topPanelButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Button", for: .normal)
+        return button
+    }()
+    
+    private var topPanelStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+//        stack.backgroundColor = .brown
+        return stack
+    }()
     
     let selectedCategoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Selected Category"
         label.textColor = UIColor.darkBlueEM
-        label.font = UIFont(name: String.MarkPro, size: 25)
+        label.font = UIFont(name: String.MarkProBold, size: 25)
         return label
         
     }()
@@ -65,35 +105,37 @@ class MainViewController: ViewController {
     private var labelButtonStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = .lightGray
         return stack
     }()
     
     let selectedCategoryScroll: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
         return view
     }()
     
     let searcBar: UISearchTextField = {
         let search = UISearchTextField()
         search.translatesAutoresizingMaskIntoConstraints = false
-        search.backgroundColor = .white
+        search.layer.cornerRadius = 50
         return search
     }()
     
     let searchFilterButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("S", for: .normal)
+        button.setImage(UIImage(named: "SearchButton"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = UIColor.orangeEM
+        button.layer.cornerRadius = 5
+        button.layer.borderColor = UIColor.clear.cgColor
         return button
     }()
     
     private var searchStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = .brown
+//        stack.backgroundColor = .brown
         return stack
     }()
     
@@ -102,7 +144,7 @@ class MainViewController: ViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hot Sales"
         label.textColor = UIColor.darkBlueEM
-        label.font = UIFont(name: String.MarkPro, size: 25)
+        label.font = UIFont(name: String.MarkProBold, size: 25)
         return label
     }()
     
@@ -118,21 +160,20 @@ class MainViewController: ViewController {
     private var hotSalesStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = .blue
         return stack
     }()
     
     let hotSalesScroll: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .cyan
         return view
     }()
     
     let hotSalesImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(systemName: "pencil")
+        image.frame.size.height = 10
+        image.frame.size.width = 10
         return image
     }()
     
@@ -141,7 +182,7 @@ class MainViewController: ViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Best Seller"
         label.textColor = UIColor.darkBlueEM
-        label.font = UIFont(name: String.MarkPro, size: 25)
+        label.font = UIFont(name: String.MarkProBold, size: 25)
         return label
     }()
     
@@ -157,23 +198,42 @@ class MainViewController: ViewController {
     private var bestSellerStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.backgroundColor = .gray
         return stack
     }()
     
     let bestSellerScroll: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .green
+//        view.backgroundColor = .green
         return view
     }()
     
     
     
     func setUpConstrains() {
-        labelButtonStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        topPanelStack.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        topPanelStack.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        topPanelStack.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        topPanelStack.heightAnchor.constraint(equalToConstant: view.frame.height / 12).isActive = true
+        
+//        topPanelImageLabel.centerXAnchor.constraint(equalTo: topPanelStack.centerXAnchor).isActive = true
+//        topPanelImageLabel.centerYAnchor.constraint(equalTo: topPanelStack.centerYAnchor).isActive = true
+//        topPanelImageLabel.heightAnchor.constraint(equalToConstant: topPanelStack.spacing / 2).isActive = true
+//        topPanelImageLabel.widthAnchor.constraint(equalToConstant: topPanelStack.frame.width / 2).isActive = true
+        
+//        topPanelImage.centerXAnchor.constraint(equalTo: topPanelStack.centerXAnchor).isActive = true
+//        topPanelImage.rightAnchor.constraint(equalTo: topPanelLabel.leftAnchor).isActive = true
+//        topPanelImage.heightAnchor.constraint(equalToConstant: 10).isActive = true
+//        topPanelImage.widthAnchor.constraint(equalToConstant: 10).isActive = true
+//        topPanelLabel.centerXAnchor.constraint(equalTo: topPanelStack.centerXAnchor).isActive = true
+//        topPanelLabel.bottomAnchor.constraint(equalTo: topPanelStack.bottomAnchor).isActive = true
+        
+//        topPanelButton.rightAnchor.constraint(equalTo: topPanelStack.rightAnchor).isActive = true
+        
+        
+        labelButtonStack.topAnchor.constraint(equalTo: topPanelStack.bottomAnchor).isActive = true
         labelButtonStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        labelButtonStack.heightAnchor.constraint(equalToConstant: view.frame.height / 7).isActive = true
+        labelButtonStack.heightAnchor.constraint(equalToConstant: view.frame.height / 20).isActive = true
         
         selectedCategoryLabel.bottomAnchor.constraint(equalTo: labelButtonStack.bottomAnchor).isActive = true
         selectedCategoryLabel.leftAnchor.constraint(equalTo: labelButtonStack.leftAnchor).isActive = true
@@ -186,11 +246,14 @@ class MainViewController: ViewController {
         selectedCategoryScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 12).isActive = true
         
         searchStack.topAnchor.constraint(equalTo: selectedCategoryScroll.bottomAnchor).isActive = true
-        searchStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        searchStack.heightAnchor.constraint(equalToConstant: view.frame.height / 18).isActive = true
+        searchStack.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        searchStack.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        searchStack.heightAnchor.constraint(equalToConstant: view.frame.height / 24).isActive = true
         
         searcBar.leftAnchor.constraint(equalTo: searchStack.leftAnchor).isActive = true
+        
         searchFilterButton.rightAnchor.constraint(equalTo: searchStack.rightAnchor).isActive = true
+        searchFilterButton.widthAnchor.constraint(equalToConstant: view.frame.width / 13).isActive = true
         
         hotSalesStack.topAnchor.constraint(equalTo: searchStack.bottomAnchor).isActive = true
         hotSalesStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
@@ -200,8 +263,14 @@ class MainViewController: ViewController {
         hotSalesButton.rightAnchor.constraint(equalTo: hotSalesStack.rightAnchor).isActive = true
         
         hotSalesScroll.topAnchor.constraint(equalTo: hotSalesStack.bottomAnchor).isActive = true
-        hotSalesScroll.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        hotSalesScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 4).isActive = true
+        hotSalesScroll.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        hotSalesScroll.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        hotSalesScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 3.8).isActive = true
+        
+        hotSalesImage.topAnchor.constraint(equalTo: hotSalesScroll.topAnchor).isActive = true
+        hotSalesImage.leftAnchor.constraint(equalTo: hotSalesScroll.leftAnchor).isActive = true
+        hotSalesImage.rightAnchor.constraint(equalTo: hotSalesScroll.rightAnchor).isActive = true
+        hotSalesImage.bottomAnchor.constraint(equalTo: hotSalesScroll.bottomAnchor).isActive = true
         
         bestSellerStack.topAnchor.constraint(equalTo: hotSalesScroll.bottomAnchor).isActive = true
         bestSellerStack.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
@@ -212,7 +281,28 @@ class MainViewController: ViewController {
         
         bestSellerScroll.topAnchor.constraint(equalTo: bestSellerStack.bottomAnchor).isActive = true
         bestSellerScroll.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        bestSellerScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 4).isActive = true
+        bestSellerScroll.heightAnchor.constraint(equalToConstant: view.frame.height / 3.8).isActive = true
+        
+    }
+    
+    func downloadHotSellerImage() {
+        api.downloadHomeScreenApi(url: String.apiHomeScreen) {
+            let session = URLSession(configuration: .default)
+            
+            guard let imageURL = URL(string: self.api.pictureURL) else {
+                fatalError("This is not URL")
+            }
+            
+            let task = session.dataTask(with: imageURL) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.hotSalesImage.image = UIImage(data: data)
+                }
+            }
+            task.resume()
+        }
         
     }
     

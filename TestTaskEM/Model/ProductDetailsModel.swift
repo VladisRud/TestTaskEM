@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK: - Welcome
+// MARK: - ProductDetails
 struct ProductDetails: Codable {
     let cpu, camera: String
     let capacity, color: [String]
